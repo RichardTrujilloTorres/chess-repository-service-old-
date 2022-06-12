@@ -16,3 +16,27 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+
+$router->group([
+//    'middleware' => '',
+    'prefix' => 'users',
+], function () use($router) {
+    $router->post('', 'User\RegisterController@__invoke');
+});
+
+$router->group([
+//    'middleware' => '',
+    'prefix' => 'games',
+], function () use($router) {
+    $router->get('{id:[0-9]+}', 'Game\ShowController@__invoke');
+    $router->get('{id:[0-9]+}/download', 'Game\DownloadController@__invoke');
+    $router->post('', 'Game\UploadController@__invoke');
+});
+
+$router->group([
+//    'middleware' => '',
+    'prefix' => 'analysis',
+], function () use($router) {
+    $router->post('{id:[0-9]+}', 'Analysis\AppendController@__invoke');
+});
