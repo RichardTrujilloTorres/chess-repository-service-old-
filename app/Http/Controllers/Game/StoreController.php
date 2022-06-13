@@ -7,7 +7,7 @@ use App\Models\Game;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class UploadController extends Controller
+class StoreController extends Controller
 {
     public function __invoke(Request $request)
     {
