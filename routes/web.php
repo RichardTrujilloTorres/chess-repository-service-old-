@@ -31,7 +31,7 @@ $router->group([
 ], function () use($router) {
     $router->get('{id:[0-9]+}', 'Game\ShowController@__invoke');
     $router->get('{id:[0-9]+}/download', 'Game\DownloadController@__invoke');
-    $router->post('', 'Game\UploadController@__invoke');
+    $router->post('', 'Game\StoreController@__invoke');
 });
 
 $router->group([
