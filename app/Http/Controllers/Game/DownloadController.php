@@ -15,7 +15,14 @@ class DownloadController extends Controller
         /**
          * @var Game $game
          */
-        $game = Game::findOrFail($id);
+        $game = Game::find($id);
+        if (empty($game)) {
+            return response()->json([
+                'message' => 'Game not found.',
+                'status' => 'error',
+                'data' => [],
+            ], Response::HTTP_NOT_FOUND);
+        }
 
         return response()->streamDownload(function () use ($game) {
             echo $game->moves;
