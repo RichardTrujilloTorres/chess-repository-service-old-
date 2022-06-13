@@ -11,7 +11,7 @@ class ShowController extends Controller
 {
     public function __invoke(int $id, Request $request)
     {
-        // parse different data elaboration options
+        // TODO: parse different data elaboration options
 
         /**
          * @var Game $game
