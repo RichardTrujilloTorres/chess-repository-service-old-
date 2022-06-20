@@ -19,15 +19,15 @@ $router->get('/', function () use ($router) {
 
 
 $router->group([
-    'prefix' => 'users',
+    'prefix' => 'auth',
 ], function () use($router) {
     $router->post('login', 'User\LoginController@__invoke');
     $router->post('', 'User\RegisterController@__invoke');
-    $router->post('', 'User\LogoutController@__invoke');
 
     $router->group(['middleware' => ['auth']], function () use($router) {
-        $router->post('refresh', 'User\TokenRefreshController@__invoke');
-        $router->post('user', 'User\UserController@__invoke');
+        $router->get('refresh', 'User\TokenRefreshController@__invoke');
+        $router->get('user', 'User\UserController@__invoke');
+        $router->put('user', 'User\UserUpdateController@__invoke');
         $router->post('logout', 'User\LogoutController@__invoke');
     });
 });
