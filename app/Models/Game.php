@@ -36,4 +36,9 @@ class Game extends Model
     {
         return $this->hasMany(Analysis::class);
     }
+
+    public function scopeByUser($builder, int $id)
+    {
+        return $builder->where('user_id', $id);
+    }
 }
