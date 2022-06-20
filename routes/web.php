@@ -34,6 +34,13 @@ $router->group([
 
 $router->group([
     'middleware' => ['auth'],
+    'prefix' => 'users',
+], function () use($router) {
+    $router->put('', 'User\UserUpdateController@__invoke');
+});
+
+$router->group([
+    'middleware' => ['auth'],
     'prefix' => 'games',
 ], function () use($router) {
     $router->get('{id:[0-9]+}', 'Game\ShowController@__invoke');
