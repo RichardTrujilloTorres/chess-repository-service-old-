@@ -19,14 +19,21 @@ $router->get('/', function () use ($router) {
 
 
 $router->group([
-//    'middleware' => '',
     'prefix' => 'users',
 ], function () use($router) {
+    $router->post('login', 'User\LoginController@__invoke');
     $router->post('', 'User\RegisterController@__invoke');
+    $router->post('', 'User\LogoutController@__invoke');
+
+    $router->group(['middleware' => ['auth']], function () use($router) {
+        $router->post('refresh', 'User\TokenRefreshController@__invoke');
+        $router->post('user', 'User\UserController@__invoke');
+        $router->post('logout', 'User\LogoutController@__invoke');
+    });
 });
 
 $router->group([
-//    'middleware' => '',
+    'middleware' => ['auth'],
     'prefix' => 'games',
 ], function () use($router) {
     $router->get('{id:[0-9]+}', 'Game\ShowController@__invoke');
@@ -35,7 +42,7 @@ $router->group([
 });
 
 $router->group([
-//    'middleware' => '',
+    'middleware' => ['auth'],
     'prefix' => 'analysis',
 ], function () use($router) {
     $router->post('{id:[0-9]+}', 'Analysis\AppendController@__invoke');
