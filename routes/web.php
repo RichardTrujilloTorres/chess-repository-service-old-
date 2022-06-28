@@ -47,6 +47,7 @@ $router->group([
     $router->get('{id:[0-9]+}', 'Game\ShowController@__invoke');
     $router->get('{id:[0-9]+}/download', 'Game\DownloadController@__invoke');
     $router->post('', 'Game\StoreController@__invoke');
+    $router->delete('{id:[0-9]+}', 'Game\DeleteController@__invoke');
 });
 
 $router->group([
