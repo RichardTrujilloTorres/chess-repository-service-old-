@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Game extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     const DEFAULT_FILE_EXTENSION = 'pgn';
 
@@ -40,5 +41,10 @@ class Game extends Model
     public function scopeByUser($builder, int $id)
     {
         return $builder->where('user_id', $id);
+    }
+
+    public function searchableAs(): string
+    {
+        return 'game_index';
     }
 }
