@@ -62,6 +62,7 @@ $app->singleton(
 $app->configure('app');
 $app->configure('jwt');
 $app->configure('auth');
+$app->configure('elasticsearch');
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +100,8 @@ $app->instance('path.config', app()->basePath() . DIRECTORY_SEPARATOR . 'config'
  $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(\PHPOpenSourceSaver\JWTAuth\Providers\LumenServiceProvider::class);
+$app->register(\App\Providers\Search\SearchServiceProvider::class);
+$app->register(\Matchish\ScoutElasticSearch\ScoutElasticSearchServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
