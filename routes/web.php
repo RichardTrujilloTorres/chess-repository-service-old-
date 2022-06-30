@@ -44,6 +44,7 @@ $router->group([
     'prefix' => 'games',
 ], function () use($router) {
     $router->get('', 'Game\IndexController@__invoke');
+    $router->get('search', 'Game\SearchController@__invoke');
     $router->get('{id:[0-9]+}', 'Game\ShowController@__invoke');
     $router->get('{id:[0-9]+}/download', 'Game\DownloadController@__invoke');
     $router->post('', 'Game\StoreController@__invoke');
