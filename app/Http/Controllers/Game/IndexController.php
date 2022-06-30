@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Game;
 
 use App\Http\Controllers\Controller;
 use App\Models\Game;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class IndexController extends Controller
 {
@@ -17,7 +16,7 @@ class IndexController extends Controller
         ]);
 
         /**
-         * @var Game $game
+         * @var LengthAwarePaginator $game
          */
         $games = Game::byUser($request->user_id)->orderBy('id', 'DESC')->paginate();
 
