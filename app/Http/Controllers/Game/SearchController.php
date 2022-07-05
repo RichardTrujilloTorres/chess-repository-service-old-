@@ -19,7 +19,7 @@ class SearchController extends Controller
         /**
          * @var Collection $games
          */
-        $games = \App\Models\Game::search($request->input('query'))->where('user_id', $request->user_id)->get();
+        $games = Game::search($request->input('query'))->where('user_id', $request->user_id)->get();
 
         return response()->json([
             'message' => '',
