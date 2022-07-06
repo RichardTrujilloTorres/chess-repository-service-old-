@@ -13,7 +13,7 @@ class SearchController extends Controller
     {
         $this->validate($request, [
             'user_id' => 'required|exists:users,id',
-            'query' => 'required|string|min:1',
+            'query' => 'sometimes|string',
         ]);
 
         /**
