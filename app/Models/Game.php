@@ -47,4 +47,12 @@ class Game extends Model
     {
         return 'game_index';
     }
+
+    public function toSearchableArray()
+    {
+        return [
+            'moves' => $this->moves,
+            'opponent' => $this->opponent,
+        ];
+    }
 }
