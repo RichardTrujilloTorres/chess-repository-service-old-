@@ -22,16 +22,18 @@ class SearchServiceProvider extends ServiceProvider
 
         $this->app->bind(Client::class, function () {
             $clientBuilder = ClientBuilder::create()->setHosts(Config::hosts());
+            /** @phpstan-ignore-next-line */
             if ($user = Config::user()) {
-                $clientBuilder->setBasicAuthentication($user, Config::password());
+                $clientBuilder->setBasicAuthentication($user, Config::password()); /** @phpstan-ignore-line */
             }
 
+            /** @phpstan-ignore-next-line */
             if ($cloudId = Config::elasticCloudId()) {
                 $clientBuilder->setElasticCloudId($cloudId)
-                    ->setApiKey(Config::apiKey());
+                    ->setApiKey(Config::apiKey()); /** @phpstan-ignore-line */
             }
 
-            $clientBuilder->setCABundle(base_path(Config::cert()));
+            $clientBuilder->setCABundle(base_path(Config::cert())); /** @phpstan-ignore-line */
 
             return $clientBuilder->build();
         });
