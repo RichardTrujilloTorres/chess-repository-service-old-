@@ -4,6 +4,7 @@ namespace Tests\User;
 
 use App\Models\User;
 use Illuminate\Http\Response;
+use Illuminate\Testing\TestResponse;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -21,6 +22,39 @@ class RegisterControllerTest extends TestCase
             'name' => ["The name field is required."],
             'password' => ["The password field is required."],
         ]);
+
+        /**
+         * @var TestResponse $response
+         */
+        $response = $this->call('POST', '/auth/register', [
+            'name' => 'not5',
+            'email' => 'some-email@test.com',
+            'password' => 'somepassword',
+        ]);
+        $this->assertResponseStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+        $response->assertJsonValidationErrors('name', null);
+
+        /**
+         * @var TestResponse $response
+         */
+        $response = $this->call('POST', '/auth/register', [
+            'name' => 'Dummy user',
+            'email' => 'some-email@test.com',
+            'password' => 'not6',
+        ]);
+        $this->assertResponseStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+        $response->assertJsonValidationErrors('password', null);
+
+        /**
+         * @var TestResponse $response
+         */
+        $response = $this->call('POST', '/auth/register', [
+            'name' => 'Dummy user',
+            'email' => $this->userData()['email'],
+            'password' => $this->userData()['password'],
+        ]);
+        $this->assertResponseStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+        $response->assertJsonValidationErrors('email', null);
     }
 
     public function testRegisterUser()
