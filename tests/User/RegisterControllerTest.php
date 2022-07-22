@@ -2,12 +2,9 @@
 
 namespace Tests\User;
 
-use App\Models\Analysis;
-use App\Models\Game;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Laravel\Lumen\Testing\DatabaseMigrations;
-use Laravel\Lumen\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class RegisterControllerTest extends TestCase
@@ -16,7 +13,7 @@ class RegisterControllerTest extends TestCase
 
     public function testValidation()
     {
-        $this->call('POST', '/users');
+        $this->call('POST', '/auth/register');
 
         $this->assertResponseStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->seeJsonEquals([
@@ -29,17 +26,16 @@ class RegisterControllerTest extends TestCase
     public function testRegisterUser()
     {
         $userData = [
-            'email' => 'dummy@test.io',
+            'email' => 'dummy@cr-service.io',
             'name' => 'Dummy user',
-            'password' => 'secretpassword',
+            'password' => 'testpassword',
         ];
-
-        $this->call('POST', '/users', $userData);
+        $this->call('POST', '/auth/register', $userData);
 
         /**
          * @var User $user
          */
-        $user = User::first();
+        $user = User::where('email', $userData['email'])->first();
 
         $this->seeInDatabase((new User())->getTable(), collect($userData)->except('password')->toArray());
         $this->assertResponseStatus(Response::HTTP_CREATED);;
