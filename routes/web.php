@@ -22,7 +22,7 @@ $router->group([
     'prefix' => 'auth',
 ], function () use($router) {
     $router->post('login', 'User\LoginController@__invoke');
-    $router->post('', 'User\RegisterController@__invoke');
+    $router->post('register', 'User\RegisterController@__invoke');
 
     $router->group(['middleware' => ['auth']], function () use($router) {
         $router->get('refresh', 'User\TokenRefreshController@__invoke');
