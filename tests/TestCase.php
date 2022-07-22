@@ -22,7 +22,8 @@ abstract class TestCase extends BaseTestCase
             'email' => $this->userData()['email'],
             'name' => $this->userData()['name'],
             'password' => Hash::make($this->userData()['password']),
-        ]);
+        ])->first();
+
         $this->logUser();
     }
 
