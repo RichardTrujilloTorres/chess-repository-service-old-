@@ -3,6 +3,7 @@
 namespace Tests\User;
 
 use Illuminate\Http\Response;
+use Illuminate\Testing\TestResponse;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -29,7 +30,7 @@ class LoginControllerTest extends TestCase
         ];
 
         /**
-         * @var Response $response
+         * @var TestResponse $response
          */
         $response = $this->call('POST', '/auth/login', $userData);
 

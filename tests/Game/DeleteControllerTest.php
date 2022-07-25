@@ -11,7 +11,7 @@ class DeleteControllerTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function testShowsGame()
+    public function testDeletesGame()
     {
         /**
          * @var Game $game
@@ -19,9 +19,8 @@ class DeleteControllerTest extends TestCase
         $game = Game::factory()->count(1)->create()->first();
 
         $this->call('DELETE', '/games/'.$game->id);
-
         $this->assertResponseStatus(Response::HTTP_CREATED);
-        $this->seeJson([
+        $this->seeJsonEquals([
             'status' => 'success',
             'message' => '',
             'data' => [],
@@ -34,7 +33,7 @@ class DeleteControllerTest extends TestCase
 
     public function testHandlesNotFound()
     {
-        $this->call('GET', '/games/11111');
+        $this->call('DELETE', '/games/11111');
 
         $this->assertResponseStatus(Response::HTTP_NOT_FOUND);
         $this->seeJsonEquals([

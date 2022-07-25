@@ -13,6 +13,7 @@ class LogoutController extends Controller
     {
         try {
             auth()->invalidate(true);
+            // @codeCoverageIgnoreStart
         } catch (JWTException $exception) {
             return response()->json([
                 'status' => 'error',
@@ -20,6 +21,7 @@ class LogoutController extends Controller
                 'exceptionMessage' => $exception->getMessage(),
             ], Response::HTTP_BAD_REQUEST);
         }
+        // @codeCoverageIgnoreEnd
 
         auth()->logout();
 

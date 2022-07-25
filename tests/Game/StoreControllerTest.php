@@ -3,10 +3,9 @@
 namespace Tests\Game;
 
 use App\Models\Game;
-use App\Models\User;
+use Database\Factories\GameFactory;
 use Illuminate\Http\Response;
 use Laravel\Lumen\Testing\DatabaseMigrations;
-use Laravel\Lumen\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class StoreControllerTest extends TestCase
@@ -36,14 +35,9 @@ class StoreControllerTest extends TestCase
 
     public function testStoresGame()
     {
-        /**
-         * @var User $user
-         */
-        $user = User::factory()->count(1)->create()->first();
-
         $gameData = [
-            'moves' => 'test moves in here...',
-            'user_id' => $user->id,
+            'moves' => (new GameFactory)->definition()['moves'],
+            'user_id' => $this->user->id,
         ];
 
         $this->call('POST', '/games', $gameData);
@@ -51,7 +45,8 @@ class StoreControllerTest extends TestCase
         /**
          * @var Game $game
          */
-        $game = $user->games()->first();
+        $game = $this->user->games()->first();
+        $game->load(['user']);
 
         $this->seeInDatabase((new Game())->getTable(), $gameData);
         $this->assertResponseStatus(Response::HTTP_CREATED);;

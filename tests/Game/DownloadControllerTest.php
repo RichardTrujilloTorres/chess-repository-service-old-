@@ -5,6 +5,7 @@ namespace Tests\Game;
 use App\Models\Game;
 use App\Models\User;
 use Illuminate\Http\Response;
+use Illuminate\Testing\TestResponse;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -18,11 +19,20 @@ class DownloadControllerTest extends TestCase
     {
         Game::factory()->count(1)->create();
 
+        /**
+         * @var TestResponse $response
+         */
         $response = $this->call('GET', '/games/1/download');
-
         $this->assertResponseOk();;
         $this->assertFalse($response->isEmpty());
         $this->seeHeader('content-type', 'text/html; charset=UTF-8');
+
+        $responseData = $response->streamedContent();
+        /**
+         * @var Game $game
+         */
+        $game = Game::findOrFail(1);
+        $this->assertEquals($responseData, $game->moves);
     }
 
     public function testHandlesNotFound()
