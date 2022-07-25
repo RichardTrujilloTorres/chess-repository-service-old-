@@ -53,6 +53,7 @@ class Game extends Model
         return [
             'moves' => $this->moves,
             'opponent' => $this->opponent,
+            'user_id' => $this->user->id,
         ];
     }
 }
