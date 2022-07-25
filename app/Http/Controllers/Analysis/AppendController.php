@@ -21,13 +21,6 @@ class AppendController extends Controller
          * @var Game $game
          */
         $game = Game::find($request->game_id);
-        if (empty($game)) {
-            return response()->json([
-                'message' => 'Game not found.',
-                'status' => 'error',
-                'data' => [],
-            ], Response::HTTP_NOT_FOUND);
-        }
 
         /**
          * @var Analysis $analysis
