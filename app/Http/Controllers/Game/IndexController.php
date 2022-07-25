@@ -16,7 +16,7 @@ class IndexController extends Controller
         ]);
 
         /**
-         * @var LengthAwarePaginator $game
+         * @var LengthAwarePaginator $games
          */
         $games = Game::byUser($request->user_id)->orderBy('id', 'DESC')->paginate();
 
