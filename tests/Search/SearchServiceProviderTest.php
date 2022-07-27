@@ -32,19 +32,4 @@ class SearchServiceProviderTest extends TestCase
     {
         $this->assertEquals([Client::class], $this->searchProvider->provides());
     }
-
-    public function testBoot()
-    {
-        $searchProviderMock = $this->getMockBuilder(SearchServiceProvider::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $searchProviderMock->expects($this->any())
-            ->method('provides')
-            ->with([
-                __DIR__ . '/../config/elasticsearch.php' => config_path('elasticsearch.php'),
-            ], 'config');
-
-        $searchProviderMock->boot();
-    }
 }
