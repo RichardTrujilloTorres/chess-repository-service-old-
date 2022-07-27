@@ -18,6 +18,7 @@ class SearchServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // @codeCoverageIgnoreStart
         $this->mergeConfigFrom(__DIR__ . './../../../config/elasticsearch.php', 'elasticsearch');
 
         $this->app->bind(Client::class, function () {
@@ -42,6 +43,7 @@ class SearchServiceProvider extends ServiceProvider
             HitsIteratorAggregate::class,
             EloquentHitsIteratorAggregate::class
         );
+        // @codeCoverageIgnoreEnd
     }
 
     /**
