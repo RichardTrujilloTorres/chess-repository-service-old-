@@ -6,7 +6,7 @@ before_install:
   - chmod 0600 ~/.gnupg/gpg.conf
 
 before_script:
-  - cp phpunit.travis.xml phpunit.xml
+  - cp phpunit.xml phpunit.xml
   - travis_retry composer self-update
   - travis_retry composer install --prefer-source --no-interaction
   - gpg --recv-keys C6D76C329EBADE2FB9C458CFC5095986493B4AA0
