@@ -37,7 +37,9 @@
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
-        "infection": "XDEBUG_MODE=coverage ./vendor/bin/infection --threads=10 --only-covered --min-msi=48 --min-covered-msi=70"
+        "infection": "XDEBUG_MODE=coverage ./vendor/bin/infection --threads=10 --only-covered --min-msi=48 --min-covered-msi=70",
+        "phpcbf": "vendor/bin/phpcbf --standard=PSR2 app/*.php tests/*.php",
+        "phpcs": "vendor/bin/phpcs --standard=PSR2 app/*.php tests/*.php"
     },
     "config": {
         "optimize-autoloader": true,
