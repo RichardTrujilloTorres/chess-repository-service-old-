@@ -30,6 +30,9 @@ composer install
 php artisan migrate
 ```
 
+The search service requires an Elasticsearch instance at port 9200.
+Replace the JWT sample values.
+
 ## Demo
 Check out the [demo][link-demo].
 
