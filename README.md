@@ -33,6 +33,9 @@ php artisan migrate
 The search service requires an Elasticsearch instance at port 9200.
 Replace the JWT sample values.
 
+## Local Testing
+You can use [Expose][link-expose] to make the app internet accessible.
+
 ## Demo
 Check out the [demo][link-demo].
 
@@ -51,3 +54,4 @@ Again, the customary. If you find some issues, please let me know.
 
 [link-chess-media-service]: https://github.com/RichardTrujilloTorres/chess-media-service
 [link-demo]: https://master.d2w903qzsa9bxc.amplifyapp.com/
+[link-expose]: https://expose.dev/docs/getting-started/sharing-your-first-site 
