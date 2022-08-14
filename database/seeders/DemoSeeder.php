@@ -18,7 +18,7 @@ class DemoSeeder extends Seeder
     {
         User::create([
             'name' => 'demo',
-            'email' => 'demo@chess-repository-service.io',
+            'email' => 'demo@chessrepository.io',
             'password' => Hash::make('secret'),
         ]);
     }
