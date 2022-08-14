@@ -53,5 +53,5 @@ Again, the customary. If you find some issues, please let me know.
 ## License
 
 [link-chess-media-service]: https://github.com/RichardTrujilloTorres/chess-media-service
-[link-demo]: https://master.d2w903qzsa9bxc.amplifyapp.com/
+[link-demo]: https://richardtrujillotorres.github.io/chess-repository-spa/
 [link-expose]: https://expose.dev/docs/getting-started/sharing-your-first-site 
