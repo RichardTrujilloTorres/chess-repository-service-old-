@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Providers\Search;
 
 use App\Providers\Search\Config\Config;
-use Elastic\Elasticsearch\Client;
-use Elastic\Elasticsearch\ClientBuilder;
+use Elasticsearch\Client;
+use Elasticsearch\ClientBuilder;
 use Illuminate\Support\ServiceProvider;
 use Matchish\ScoutElasticSearch\ElasticSearch\EloquentHitsIteratorAggregate;
 use Matchish\ScoutElasticSearch\ElasticSearch\HitsIteratorAggregate;
@@ -34,7 +34,7 @@ class SearchServiceProvider extends ServiceProvider
                     ->setApiKey(Config::apiKey()); /** @phpstan-ignore-line */
             }
 
-            $clientBuilder->setCABundle(base_path(Config::cert())); /** @phpstan-ignore-line */
+            $clientBuilder->setSSLCert(base_path(Config::cert())); /** @phpstan-ignore-line */
 
             return $clientBuilder->build();
         });
