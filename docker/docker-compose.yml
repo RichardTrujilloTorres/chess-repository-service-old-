@@ -1,4 +1,4 @@
-version: '2.2'
+version: '2'
 
 networks:
   app-tier:
@@ -49,9 +49,7 @@ services:
     networks:
       - app-tier
   apache:
-    build:
-      context: .
-      dockerfile: ApacheDockerfile
+    image: rickynroses87/apache:latest
     ports:
       - 80:8080
     volumes:
